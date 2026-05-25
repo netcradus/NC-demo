@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netcradus | Project Ecosystem Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Logo Color Palette Integration */
+        :root {
+            --bg-pure-black: #000000;
+            --bg-surface: #0a0a0c;
+            --bg-card: #121216;
+            --border-subtle: #222227;
+            
+            /* Logo Gradient Extractions */
+            --logo-orange: #ff7300;
+            --logo-pink: #e61f72;
+            --logo-purple: #801080;
+            
+            /* Unified Linear Gradients matching the branding */
+            --gradient-primary: linear-gradient(135deg, #ff7a00 0%, #ff2a6d 50%, #9500ff 100%);
+            --gradient-text: linear-gradient(135deg, #ffffff 40%, #ff7a00 70%, #ff2a6d 100%);
+            
+            --text-main: #f3f4f6;
+            --text-muted: #a1a1aa;
+            
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --font-display: 'Space Grotesk', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-pure-black);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Ambient Background Glow elements */
+        .ambient-glow-1 {
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 115, 0, 0.08) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .ambient-glow-2 {
+            position: absolute;
+            top: 40%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(230, 31, 114, 0.05) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-subtle);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 100px;
+            height: auto;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #fff;
+        }
+
+        .toll-free-badge {
+            background: rgba(255, 115, 0, 0.07);
+            border: 1px solid rgba(255, 115, 0, 0.3);
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #fff !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: inset 0 0 12px rgba(230, 31, 114, 0.05);
+        }
+
+        .toll-free-badge i {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .toll-free-badge:hover {
+            border-color: var(--logo-pink);
+            box-shadow: 0 0 20px rgba(230, 31, 114, 0.2);
+        }
+
+        /* Welcome Hero Section */
+        .hero {
+            position: relative;
+            padding: 11rem 2rem 7rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-subtle);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .enterprise-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.35rem 1rem;
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            color: #fff;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .enterprise-badge .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-gradient {
+            background: var(--gradient-primary);
+            color: #fff;
+            padding: 0.85rem 2.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 25px rgba(255, 42, 109, 0.25);
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(255, 115, 0, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            color: #fff;
+            padding: 0.85rem 2.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--bg-surface);
+            border-color: var(--logo-orange);
+        }
+
+        /* Showcase Grid and Framework */
+        .showcase {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 7rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            margin-bottom: 4.5rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Premium Minimal Filters */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            font-family: var(--font-sans);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #fff;
+            border-color: #fff;
+            color: var(--bg-pure-black);
+            font-weight: 600;
+        }
+
+        /* Showcase Grid Structures */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 115, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(230, 31, 114, 0.05);
+        }
+
+        .card-body {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-category {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--logo-orange);
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+            letter-spacing: 1.5px;
+        }
+
+        .project-title {
+            font-family: var(--font-display);
+            font-size: 1.45rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            color: #fff;
+            line-height: 1.3;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+
+        .card-footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 1.5rem 2.5rem;
+            background-color: rgba(18, 18, 22, 0.4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .launch-link {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .project-card:hover .launch-link {
+            color: var(--logo-pink);
+        }
+
+        .tag-pill {
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: var(--bg-surface);
+            padding: 0.3rem 0.75rem;
+            border-radius: 4px;
+            color: var(--text-muted);
+            border: 1px solid var(--border-subtle);
+        }
+
+        /* Enterprise Hotline Central Strip */
+        .hotline-strip {
+            background: linear-gradient(90deg, rgba(255, 115, 0, 0.1) 0%, rgba(230, 31, 114, 0.1) 100%);
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .hotline-strip h2 {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .hotline-strip .phone-num {
+            font-size: 2.5rem;
+            font-family: var(--font-display);
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* Premium Brand Footer */
+        footer {
+            background-color: var(--bg-surface);
+            border-top: 1px solid var(--border-subtle);
+            padding: 5rem 2rem 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h3 {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            max-width: 350px;
+        }
+
+        .footer-meta {
+            text-align: right;
+        }
+
+        .footer-meta p {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .copyright-bar {
+            max-width: 1300px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 2.8rem; }
+            .project-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.25rem; }
+            .project-grid { grid-template-columns: 1fr; }
+            .footer-content { flex-direction: column; text-align: center; align-items: center; }
+            .footer-meta { text-align: center; }
+            .copyright-bar { flex-direction: column; text-align: center; }
+            .hotline-strip .phone-num { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo-wrapper" aria-label="Netcradus home">
+                <img src="Black-Logo.jpeg" alt="Netcradus Logo" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#welcome" class="active">Home</a></li>
+                <li><a href="#registry">Project Registry</a></li>
+                <li><a href="https://www.netcradus.in/" target="_blank">Corporate Domain</a></li>
+                <li><a href="tel:1800121008800" class="toll-free-badge"><i class="fa-solid fa-phone"></i> 1800 121 008800</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section id="welcome" class="hero">
+        <div class="hero-content">
+            <div class="enterprise-badge">
+                <span class="dot"></span> Integrated Digital Solutions Portfolio
+            </div>
+            <h1>Welcome to NETCRADUS</h1>
+            <p>Welcome to our high-performance engineering hub. This centralized portal showcases our complete project ecosystem, ranging from secure public defense frameworks and specialized validation kernels to advanced commercial distribution layers.</p>
+            <div class="hero-cta-group">
+                <a href="#registry" class="btn-gradient">Explore Registry</a>
+                <a href="https://www.netcradus.in/" target="_blank" class="btn-outline">Corporate Profile</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="registry" class="showcase">
+        <div class="section-header">
+            <h2>Project Portfolio</h2>
+            <p>A structured index of our secure applications, operational components, and active web properties.</p>
+        </div>
+
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="sortFramework('all')">All Infrastructures</button>
+            <button class="filter-btn" onclick="sortFramework('security')">Security & Government</button>
+            <button class="filter-btn" onclick="sortFramework('enterprise')">Defense & Enterprise</button>
+            <button class="filter-btn" onclick="sortFramework('commercial')">Lifestyle & Ayurveda</button>
+        </div>
+
+        <div class="project-grid">
+
+            <div class="project-card" data-cat="security">
+                <div class="card-body">
+                    <div class="project-category">Security & Gov</div>
+                    <h3 class="project-title">UP Police ATS Kiosk</h3>
+                    <p class="project-desc">A specialized, secure terminal visitor management deployment framework architected for the Anti-Terrorism Squad kiosk nodes.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag-pill">Terminal Node</span>
+                    <a href="https://vms-ats-kisok.vercel.app/" target="_blank" class="launch-link">Launch Terminal <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card" data-cat="security">
+                <div class="card-body">
+                    <div class="project-category">Security & Gov</div>
+                    <h3 class="project-title">ATS Admin Panel</h3>
+                    <p class="project-desc">The centralized administrative data orchestration panel for secure backend management of visitor credential records.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag-pill">Orchestrator</span>
+                    <a href="https://vms-ats-admin.vercel.app/" target="_blank" class="launch-link">Open Panel <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card" data-cat="security">
+                <div class="card-body">
+                    <div class="project-category">Security & Gov</div>
+                    <h3 class="project-title">NetCrad Security Audit Tool</h3>
+                    <p class="project-desc">Proprietary advanced automated environment assessment and penetration vulnerability scanner pipeline.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag-pill">Audit Engine</span>
+                    <a href="https://audit.netcradus.tech/" target="_blank" class="launch-link">Initialize Scan <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card" data-cat="security">
+                <div class="card-body">
+                    <div class="project-category">Security & Gov</div>
+                    <h3 class="project-title">CyberHaxs</h3>
+                    <p class="project-desc">A dedicated portal offering technical offensive cyber capability development frameworks and vulnerability research hubs.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag-pill">Security Hub</span>
+                    <a href="https://cyberhaxs.com/" target="_blank" class="launch-link">Explore Platform <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card" data-cat="enterprise">
+                <div class="card-body">
+                    <div class="project-category">Defense & Enterprise</div>
+                    <h3 class="project-title">HAL Demo Version</h3>
+                    <p class="project-desc">A high-fidelity operational blueprint and prototype architecture interface built for Hindustan Aeronautics Limited.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag-pill">Simulation</span>
+                    <a href="https://hal-demoversion.vercel.app/home" target="_blank" class="launch-link">View Demo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card" data-cat="enterprise">
+                <div class="card-body">
+                    <div class="project-category">Defense & Enterprise</div>
+                    <h3 class="project-title">Dedicated CRM</h3>
+                    <p class="project-desc">Internal operational customer lifecycle platform managing critical enterprise communication pathways securely.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag-pill">Internal ERP</span>
+                    <a href="https://crm.netcradus.tech/login" target="_blank" class="launch-link">Secure Access <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card" data-cat="enterprise">
+                <div class="card-body">
+                    <div class="project-category">Defense & Enterprise</div>
+                    <h3 class="project-title">Hospital Management System</h3>
+                    <p class="project-desc">A complex institutional management array handling localized bed data vectors, records, and clinician access portals.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag-pill">Healthcare ERP</span>
+                    <a href="https://hospital-management-system-five-mu.vercel.app/auth/login" target="_blank" class="launch-link">Connect Node <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card" data-cat="enterprise">
+                <div class="card-body">
+                    <div class="project-category">Defense & Enterprise</div>
+                    <h3 class="project-title">Dedicated Corporate Site</h3>
+                    <p class="project-desc">The flagship corporate web presence defining Netcradus service standards and active compliance infrastructure metrics.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag-pill">Main Domain</span>
+                    <a href="https://www.netcradus.in/" target="_blank" class="launch-link">Visit Web <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card" data-cat="commercial">
+                <div class="card-body">
+                    <div class="project-category">Lifestyle & Ayurveda</div>
+                    <h3 class="project-title">Rhicik Ayurveda</h3>
+                    <p class="project-desc">A clean, fluid corporate consumer e-commerce portal delivering authentic natural medicinal products internationally.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag-pill">E-Comm Live</span>
+                    <a href="https://www.rhichikayurveda.com/" target="_blank" class="launch-link">Visit Store <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card" data-cat="commercial">
+                <div class="card-body">
+                    <div class="project-category">Lifestyle & Ayurveda</div>
+                    <h3 class="project-title">Vastraalane</h3>
+                    <p class="project-desc">High-load retail web matrix optimized for seamless fashion apparel inventory distribution and digital commerce tracks.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag-pill">Retail Live</span>
+                    <a href="https://www.vastraalane.com/" target="_blank" class="launch-link">Visit Store <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+
+            <div class="project-card" data-cat="commercial">
+                <div class="card-body">
+                    <div class="project-category">Lifestyle & Ayurveda</div>
+                    <h3 class="project-title">OOuRAAA</h3>
+                    <p class="project-desc">A premium responsive consumer interface platform engineered to handle complex web presentation matrices fluidly.</p>
+                </div>
+                <div class="card-footer">
+                    <span class="tag-pill">Web Front</span>
+                    <a href="https://www.oouraa.com/" target="_blank" class="launch-link">Open Platform <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="hotline-strip">
+        <h2>24/7 Enterprise Support Helpline</h2>
+        <span class="phone-num">1800 121 008800</span>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>NETCRADUS</h3>
+                <p>Enterprise Operations and Next-Generation Digital Architecture Labs.</p>
+            </div>
+            <div class="footer-meta">
+                <p>Toll Free Global Line</p>
+                <p style="color: #fff; font-family: var(--font-display); font-weight:600;">1800 121 008800</p>
+            </div>
+        </div>
+        <div class="copyright-bar">
+            <span>&copy; 2026 Netcradus. All Rights Reserved.</span>
+            <span>Security Framework Verified Portals</span>
+        </div>
+    </footer>
+
+    <script>
+        function sortFramework(catID) {
+            // Manage Active Button States
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Manage Grid Item Visibility Transitions
+            const items = document.querySelectorAll('.project-card');
+            items.forEach(card => {
+                if (catID === 'all') {
+                    card.style.display = 'flex';
+                } else {
+                    if (card.getAttribute('data-cat') === catID) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
